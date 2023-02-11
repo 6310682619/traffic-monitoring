@@ -1,5 +1,7 @@
 # Smart Traffic Monitoring
 
+## Links
+[Figma](https://www.figma.com/file/73fS3vkKq0NxxduDLHL5PR/cn332?node-id=0%3A1&t=lVOX92F7X57qI8O7-1)
 
 ## TEAM MEMBERS
 
