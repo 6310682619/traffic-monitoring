@@ -1,47 +1,26 @@
 {% extends 'user/layout.html' %}
 {% block body %}
 <body class="h-100">
-
-    <!-- Main box -->
-    <div class="box">
-        <div class="title-box">
-          <p style="color: #3F4682; font-weight:700; font-size: 90px; line-height: 140%;">ChatUp</p>
-          <p>Chilling on ChatUp!</p>
-        </div>
-        <div class="form-box">
-          <form action="{% url 'user:signin' %}" method="post">
-            {% csrf_token %}
-            <h4 style="text-align: left;">Username</h4>
-            <input type="text" name="username" placeholder="Username">
-            <h4 style="text-align: left;">Password</h4>
-            <input type="password" name="password" placeholder="Password">
+  <section>
+    <div class="text-center mt-4">
+      <p class="header">Sign In</p>
+      <div class="container w-50">
+        <form class="mt-5" action="#" method="POST">
+          {% csrf_token %} 
+          <div class="form-row text-left">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password">
             {% if message %}
             <div style="color: red">{{ message }}</div>
             {% endif %}
-<!--             <a href="#" style="text-align: left;">Forget Password?</a> -->
             <button type="submit">Sign In</button>
-          </form>
-          <hr>
-          <div class="create-btn">
-            <a href="{% url 'user:signup' %}" target="_blank">Sign Up</a>
+            <a href="#" >Don't have an account?</a>
           </div>
-        </div>
+        </form> 
       </div>
     </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-          <div class="row pt-3">
-            <div class="col-7">
-              <h3>Let's chat with your friend!</h3>
-            </div>
-            <div class="col-7">
-                <h5>The place for contact your friends.</h5>
-            </div>
-          </div>
-        </div>
-    </footer>
-    <br>
+  </section>
 </body>
 {% endblock %}
