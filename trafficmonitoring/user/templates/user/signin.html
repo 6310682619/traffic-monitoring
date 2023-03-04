@@ -1,0 +1,47 @@
+{% extends 'user/layout.html' %}
+{% block body %}
+<body class="h-100">
+
+    <!-- Main box -->
+    <div class="box">
+        <div class="title-box">
+          <p style="color: #3F4682; font-weight:700; font-size: 90px; line-height: 140%;">ChatUp</p>
+          <p>Chilling on ChatUp!</p>
+        </div>
+        <div class="form-box">
+          <form action="{% url 'user:signin' %}" method="post">
+            {% csrf_token %}
+            <h4 style="text-align: left;">Username</h4>
+            <input type="text" name="username" placeholder="Username">
+            <h4 style="text-align: left;">Password</h4>
+            <input type="password" name="password" placeholder="Password">
+            {% if message %}
+            <div style="color: red">{{ message }}</div>
+            {% endif %}
+<!--             <a href="#" style="text-align: left;">Forget Password?</a> -->
+            <button type="submit">Sign In</button>
+          </form>
+          <hr>
+          <div class="create-btn">
+            <a href="{% url 'user:signup' %}" target="_blank">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+          <div class="row pt-3">
+            <div class="col-7">
+              <h3>Let's chat with your friend!</h3>
+            </div>
+            <div class="col-7">
+                <h5>The place for contact your friends.</h5>
+            </div>
+          </div>
+        </div>
+    </footer>
+    <br>
+</body>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends 'user/layout.html' %}
+{% block body %}
+
+<body class="h-100">
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-3">
+    <a class="navbar-brand chatup" style="color: #3F4682; font-size:25px;" href="#">
+        <img src="https://i.imgur.com/d09bZgy.png" width="25px">
+        ChatUp
+    </a>
+    <div class="collapse navbar-collapse  w-100 order-3 dual-collapse2" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="btn mx-3 align-middle" style="background-color: #3F4682; color: white;" href="{% url 'user:signin' %}" role="button">
+                  Sign In
+                </a>
+              </li>
+        </ul>
+    </div>
+</nav>
+<section>
+    <div class="text-center mt-4">
+      <p class="header">Sign Up</p>
+      <div class="container w-50">
+        <form class="mt-5" action="{% url 'user:signup' %}" method="POST">
+          {% csrf_token %} 
+          <div class="form-row text-center" style="display: flex; justify-content: center;">
+            {% comment %} <div class="form-group">
+                <img src="https://i.pinimg.com/564x/10/01/7f/10017f98303ce873c8fbf53d28fcee99.jpg" class="profileimg">
+                <p>Upload your profile picture</p>
+            </div> {% endcomment %}
+          </div>
+
+          <div class="form-row text-left">
+            <div class="form-group col-md-6">
+              <label for="inputFirst">First Name</label>
+              <input required type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" value="{{ firstname }}">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputLast">Last Name</label>
+              <input required type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" value="{{ lastname }}">
+            </div>
+          </div>
+          <div class="form-group text-left">
+            <label for="inputEmail">Username</label>
+            {% if usermessage %}
+                <div style="color: red">{{ usermessage }}</div>
+            {% endif %}
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="{{ username }}">
+          </div>
+          <div class="form-group text-left">
+            <label for="inputEmail">Email</label>
+            <input required type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ email }}">
+          </div>
+          <div class="form-row text-left">
+            <div class="form-group col-md-4">
+              <label for="inputPhone">Phone Number</label>
+              {% if phmessage %}
+              <div>&nbsp</div>
+              {% endif %}
+              <select name="prefixPhoneNumber" class="form-control" required> 
+                <option value="+66">Thailand (+66)</option>
+                <option value="+61">Australia (+61)</option>
+                <option value="+32">Belgium (+32)</option>
+                <option value="+55">Brazil (+55)</option>
+                <option value="+1">Canada (+1)</option>
+                <option value="+86">China (+86)</option>
+                <option value="+57">Colombia (+57)</option>
+                <option value="+852">Hong Kong (+852)</option>
+                <option value="+91">India (+91)</option>
+                <option value="+62">Indonesia (+62)</option>
+                <option value="+39">Italy (+39)</option>
+                <option value="+60">Malaysia (+60)</option>
+                <option value="+52">Mexico (+52)</option>
+                <option value="+64">New Zealand (+64)</option>
+                <option value="+63">Philippines (+63)</option>
+                <option value="+48">Poland (+48)</option>
+                <option value="+7">Russia (+7)</option>
+                <option value="+65">Singapore (+65)</option>
+                <option value="+27">South Africa (+27)</option>
+                <option value="+34">Spain (+34)</option>
+                <option value="+41">Switzerland (+41)</option>
+                <option value="+886">Taiwan (+886)</option>
+                <option value="+971">United Arab Emirates (+971)</option>
+                <option value="+1">United States (+1)</option>
+                <option value="+44">United Kingdom (+44)</option>
+                <option value="+678">Vanuatu (+678)</option>
+                <option value="+388">Europe (+388)</option>
+              </select>
+            </div>
+            <div class="form-group col-md-8">
+              <label for="inputPhone">&nbsp</label>
+              {% if phmessage %}
+              <div style="color: red">{{ phmessage }}</div>
+              {% endif %}
+              <input type="text" class="form-control" id="phonenumber" name="phonenumber" placeholder="Phone Number" value="{{ phonenumber }}">
+            </div>
+          </div>
+          <div class="form-group text-left"
+            <label for="inputPhone">ChatUp ID</label>
+            {% if idmessage %}
+                <div style="color: red">{{ idmessage }}</div>
+            {% endif %}
+            <input type="text" class="form-control" id="chatupid" name="chatupid" placeholder="Chatup ID" value="{{ chatupid }}">
+          </div>
+          <div class="form-group text-left">
+              <label for="inputPassword">Password</label>
+              {% if passwordmessage %}
+                <div style="color: red">{{ passwordmessage }}</div>
+              {% endif %}
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="{{ password }}">
+          </div>
+          <div class="form-group text-left">
+              <label for="inputPassword2">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" value="{{ confirmpassword }}">
+          </div>
+          <button type="submit" class="btn" style="background-color: #3F4682; color: white;">Next</button>
+        </form> 
+      </div>
+    </div>
+  </section>
+  <br><br><br>
+</body>
+{% endblock %}
