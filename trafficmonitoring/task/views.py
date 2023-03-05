@@ -7,6 +7,9 @@ from user.models import Account
 
 # Create your views here.
 
+def index(request):
+    return render(request, 'task/index.html')
+
 def counting_result(request, task_id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user:login'))
