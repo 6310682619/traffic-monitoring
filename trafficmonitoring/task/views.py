@@ -8,7 +8,14 @@ from user.models import Account
 # Create your views here.
 
 def index(request):
-    return render(request, 'task/index.html')
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('user:login'))
+    
+    task = Task.objects.all().order_by('-date_time')
+
+    return render(request, 'task/index.html', {
+        'task': task,
+    })
 
 def counting_result(request, task_id):
     if not request.user.is_authenticated:
@@ -56,3 +63,14 @@ def create_task(request):
 
     return HttpResponseRedirect(reverse('task:mytask'))
 
+def my_task(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('user:login'))
+    
+    user = User.objects.get(username=request.user.username)
+    account = Account.objects.get(user=user)
+    task = Task.objects.filter(account=account).order_by('-date_time')
+
+    return render(request, 'task/mytask.html', {
+        'task': task,
+    })
