@@ -4,7 +4,7 @@ from user.models import Account
     
 class Task(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    date_time = models.CharField(max_length=100)
+    date_time = models.DateTimeField('date_time', auto_now_add=True)
     date_time_modify = models.CharField(max_length=100)
     date_time_upload = models.CharField(max_length=100)
     location = models.CharField(max_length=100)

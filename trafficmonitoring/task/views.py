@@ -2,6 +2,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from .models import Task, Input, Result, Loop, Car, TotalCar
+from django.contrib.auth.models import User
+from user.models import Account
+
 # Create your views here.
 
 def counting_result(request, task_id):
@@ -31,4 +34,22 @@ def counting_result(request, task_id):
         'totalcar': totalcar
     })
 
+def create_task(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('user:login'))
+    
+    if request.method == 'POST':
+        user = User.objects.get(username=request.user.username)
+        account = Account.objects.get(user=user)
+        location = request.POST['location']
+        description = request.POST['description']
+        status = request.POST['status']
+
+        task = Task.objects.create(account=account, location=location,
+                                    description=description, status=status)
+        
+        video = request.FILES.getlist('video')
+        Input.objects.create(task=task, video=video[-1])
+
+    return HttpResponseRedirect(reverse('task:mytask'))
 
