@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 app_name = 'task'
 
 urlpatterns = [
+    path('', views.index, name='index'),
     path('result/<int:task_id>', views.counting_result, name='result'),
     path('create_task', views.create_task, name='create_task'),
 
