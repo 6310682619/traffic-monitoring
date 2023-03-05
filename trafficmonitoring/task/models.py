@@ -42,7 +42,7 @@ class Loop(models.Model):
         return f"{self.loop_name}"
 class Car(models.Model):
     loop = models.ForeignKey(Loop, on_delete=models.CASCADE)
-    car_total = models.IntegerField(max_length=200)
+    car_total = models.IntegerField(default=0)
     car_type = models.CharField(max_length=20)
     direction = models.CharField(max_length=20)
 
@@ -52,7 +52,7 @@ class Car(models.Model):
 class TotalCar(models.Model):
     result = models.ForeignKey(Result, on_delete=models.CASCADE)
     type = models.CharField(max_length=20)
-    total = models.IntegerField(max_length=200)
+    total = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.type}"
