@@ -1,5 +1,5 @@
 from django.contrib import admin
-from task.models import Task, Result, Input, Loop, Car
+from task.models import Task, Result, Input, Loop, Car, TotalCar
 # Register your models here.
 class TaskAdmin(admin.ModelAdmin):
     list_display = ("account", "date_time", "date_time_modify", "date_time_upload", "location", "description", "status")
@@ -15,8 +15,12 @@ class LoopAdmin(admin.ModelAdmin):
 class CarAdmin(admin.ModelAdmin):
     list_display = ("loop", "car_total", "car_type", "direction")
 
+class TotalCarAdmin(admin.ModelAdmin):
+    list_display = ("result", "type", "total")
+
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Input, InputAdmin)
 admin.site.register(Result, ResultAdmin)
 admin.site.register(Loop, LoopAdmin)
 admin.site.register(Car, CarAdmin)
+admin.site.register(TotalCar, TotalCarAdmin)

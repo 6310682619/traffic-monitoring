@@ -49,7 +49,7 @@ class Car(models.Model):
     def __str__(self):
         return f"{self.car_total}"
 
-class total_Car(models.Model):
+class TotalCar(models.Model):
     result = models.ForeignKey(Result, on_delete=models.CASCADE)
     type = models.CharField(max_length=20)
     total = models.IntegerField(max_length=200)
