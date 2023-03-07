@@ -8,7 +8,13 @@
       <p class="header">Sign Up</p>
       <div class="container w-50">
         <form class="mt-5" action="#" method="POST">
-          {% csrf_token %} 
+          {% csrf_token %}
+          <div class="form-row text-center" style="display: flex; justify-content: center;">
+            <div class="form-group">
+                <img src="https://i.pinimg.com/564x/10/01/7f/10017f98303ce873c8fbf53d28fcee99.jpg" class="profileimg">
+            </div>
+          </div>
+          <br>
           <div class="form-row text-left">
             <div class="form-group col-md-6">
               <label>First Name</label>
@@ -25,9 +31,16 @@
               <input type="text" class="form-control input-box" id="username" name="username">
             </div>
             <div class="form-group col-md-6">
+              <label>Role</label>
+              <select name="role" class="form-control input-box" required>
+                <option value="normal">Normal User</option>
+                <option value="officer">Officer</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group text-left">
               <label>Email</label>
               <input required type="email" class="form-control input-box" id="email" name="email">
-            </div>
           </div>
           <div class="form-row text-left">
             <div class="form-group col-md-6">
