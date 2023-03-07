@@ -51,17 +51,19 @@ def create_task(request):
     if request.method == 'POST':
         user = User.objects.get(username=request.user.username)
         account = Account.objects.get(user=user)
+        name = request.POST['name']
         location = request.POST['location']
-        description = request.POST['description']
-        status = request.POST['status']
+        description = request.POST['description']   
 
-        task = Task.objects.create(account=account, location=location,
-                                    description=description, status=status)
+        task = Task.objects.create(account=account, name=name,
+                                   location=location, description=description)
         
-        video = request.FILES.getlist('video')
-        Input.objects.create(task=task, video=video[-1])
+        video = request.FILES['video']
+        Input.objects.create(task=task, video=video)
 
-    return HttpResponseRedirect(reverse('task:mytask'))
+        return HttpResponseRedirect(reverse('task:mytask'))
+    
+    return render(request, 'task/create_task.html')
 
 def my_task(request):
     if not request.user.is_authenticated:

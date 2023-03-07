@@ -4,15 +4,16 @@ from user.models import Account
     
 class Task(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, default="")
     date_time = models.DateTimeField('date_time', auto_now_add=True)
-    date_time_modify = models.CharField(max_length=100)
-    date_time_upload = models.CharField(max_length=100)
-    location = models.CharField(max_length=100)
-    description = models.CharField(max_length=256)
-    status = models.CharField(max_length=15)
+    date_time_modify = models.CharField(max_length=100, default="")
+    date_time_upload = models.CharField(max_length=100, default="")
+    location = models.CharField(max_length=100, default="")
+    description = models.CharField(max_length=256, default="")
+    status = models.CharField(max_length=15, default="")
 
     def __str__(self):
-        return f"{self.date_time}"
+        return f"{self.name}"
     
 class Input(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)

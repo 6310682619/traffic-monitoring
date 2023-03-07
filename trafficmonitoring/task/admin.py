@@ -2,7 +2,7 @@ from django.contrib import admin
 from task.models import Task, Result, Input, Loop, Car, TotalCar
 # Register your models here.
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ("account", "date_time", "date_time_modify", "date_time_upload", "location", "description", "status")
+    list_display = ("account", "name", "date_time", "date_time_modify", "date_time_upload", "location", "description", "status")
 
 class InputAdmin(admin.ModelAdmin):
     list_display = ("task", "video")
