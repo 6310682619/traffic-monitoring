@@ -13,7 +13,7 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/')
+            return HttpResponseRedirect(reverse('task:index'))
         else:
             return render(request, 'user/signin.html', {
                 'message': 'Invalid credentials.'
