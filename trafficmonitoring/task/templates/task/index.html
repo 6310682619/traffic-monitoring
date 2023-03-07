@@ -1,0 +1,29 @@
+{% extends 'task/layout.html' %}
+{% block body %}
+<body id = "index">
+    <header>
+        <h1>Traffic Monitoring Site</h1>
+    </header>
+
+    <main>
+        {% for t in task %}
+            <div class="container">
+                <main class = "main">
+
+                </main>
+
+                <aside class="aside">
+                    <div>
+                        Name: {{ t.name }}<br>
+                        Location: {{ t.location}}<br>
+                        Total vehicles: {{ }}<br>
+                        Weather: {{ }}<br>
+                        Time: {{ t.date_time }}<br>
+                        Create by: {{ t.account }}<br>
+                    </div>
+                </aside>
+            </div>
+        {% endfor %}
+    </main>
+</body>
+{% endblock %}
