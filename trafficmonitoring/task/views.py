@@ -66,8 +66,8 @@ def create_task(request):
     return render(request, 'task/create_task.html')
 
 def my_task(request):
-    # if not request.user.is_authenticated:
-    #     return HttpResponseRedirect(reverse('user:signin'))
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('user:signin'))
     
     user = User.objects.get(username=request.user.username)
     account = Account.objects.get(user=user)
