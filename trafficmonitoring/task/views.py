@@ -9,7 +9,7 @@ from user.models import Account
 
 def index(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user:login'))
+        return HttpResponseRedirect(reverse('user:signin'))
     
     task = Task.objects.all().order_by('-date_time')
 
@@ -19,7 +19,7 @@ def index(request):
 
 def counting_result(request, task_id):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user:login'))
+        return HttpResponseRedirect(reverse('user:signin'))
     
     task = Task.objects.get(id=task_id)
     input = Input.objects.get(task=task)
@@ -46,7 +46,7 @@ def counting_result(request, task_id):
 
 def create_task(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user:login'))
+        return HttpResponseRedirect(reverse('user:signin'))
     
     if request.method == 'POST':
         user = User.objects.get(username=request.user.username)
@@ -67,7 +67,7 @@ def create_task(request):
 
 def my_task(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user:login'))
+        return HttpResponseRedirect(reverse('user:signin'))
     
     user = User.objects.get(username=request.user.username)
     account = Account.objects.get(user=user)
