@@ -45,15 +45,15 @@ def signup(request):
             return render(request, 'user/signup.html', {'message2': message2})
 
         # Create a new user account
-        user = User.objects.create(
-            first_name=firstname,
-            last_name=lastname,
-            username=username,
-            email=email,
-            password=password
-        )
-        account = Account.objects.create(user=user)
+        user = User.objects.create(username=username, email=email,
+                     first_name=firstname, last_name=lastname)
+        user.set_password(password)
+        user.save()
+
+        Account.objects.create(user=user)
+
         login(request, user)
         return HttpResponseRedirect(reverse('task:index',))
     else:
         return render(request, 'user/signup.html')
+    
