@@ -4,12 +4,14 @@ from django.shortcuts import render
 from .models import Task, Input, Result, Loop, Car, TotalCar
 from django.contrib.auth.models import User
 from user.models import Account
+from .task import detect_track
+from opt import OptJson
 
 # Create your views here.
 
 def index(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user:login'))
+        return HttpResponseRedirect(reverse('user:signin'))
     
     task = Task.objects.all().order_by('-date_time')
 
@@ -19,7 +21,7 @@ def index(request):
 
 def counting_result(request, task_id):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user:login'))
+        return HttpResponseRedirect(reverse('user:signin'))
     
     task = Task.objects.get(id=task_id)
     input = Input.objects.get(task=task)
@@ -46,7 +48,7 @@ def counting_result(request, task_id):
 
 def create_task(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user:login'))
+        return HttpResponseRedirect(reverse('user:signin'))
     
     if request.method == 'POST':
         user = User.objects.get(username=request.user.username)
@@ -56,18 +58,23 @@ def create_task(request):
         description = request.POST['description']   
 
         task = Task.objects.create(account=account, name=name,
-                                   location=location, description=description)
+                                   location=location, description=description,
+                                   status=Task.STATUS_PENDING)
         
         video = request.FILES['video']
-        Input.objects.create(task=task, video=video)
+        input = Input.objects.create(task=task, video=video)
 
+        opt = OptJson
+        opt['source'] = input.video.path
+        opt['project'] = './media/uploads/' + str(user.username) + '/' + str(task.id)
+        detect_track.delay(opt, task.id) 
         return HttpResponseRedirect(reverse('task:mytask'))
     
     return render(request, 'task/create_task.html')
 
 def my_task(request):
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('user:login'))
+        return HttpResponseRedirect(reverse('user:signin'))
     
     user = User.objects.get(username=request.user.username)
     account = Account.objects.get(user=user)
