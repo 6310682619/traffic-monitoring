@@ -5,8 +5,7 @@ from detect_class import Detect
 from opt import Opt
 from .models import Task, Input, Result, Loop, Car, TotalCar
 from django.contrib.auth.models import User
-from django.core.files import File
-from pathlib import Path
+
 
 @shared_task()
 def detect_track(opt_json, task_id):
@@ -20,21 +19,32 @@ def detect_track(opt_json, task_id):
         input = Input.objects.get(task=task)
         user = User.objects.get(username=task.account.user.username) 
         file_name = str(input.video).split('/')[1]
-        # video = Path('./media/uploads/' + str(user.username) + '/' + str(task.id) + '/object_tracking/' + file_name)
-        # video = './uploads/' + str(user.username) + '/' + str(task.id) + '/object_tracking/' + file_name
-        video = './uploads/' + file_name
-        # f = video_path.open(mode='rb')
-        # video = File(f)
-        result = Result.objects.create(input=input, video=video, weather='')
+
+        video = './uploads/' + str(user.username) + '/' + str(task.id) + '/object_tracking/' + file_name
+
+        result = Result.objects.create(input=input, video=video)
 
         report_result = './media/uploads/' + str(user.username) + '/' + str(task.id) + '/object_tracking/loop.txt'
         report_car = []
-        f = open(report_result, "r")
-        for x in f:
-            report_car.append(x.split(','))
-        print(report_car)
-
-        car = TotalCar.objects.create(result=result, type="car", total=len(report_car))
+        try:
+            f = open(report_result, "r")
+            for x in f:
+                report_car.append(x.split(','))
+            print(report_car)
+        except:
+            pass
+        
+        temp = []
+        for i in range(len(report_car)):
+            type_car = report_car[i][2]
+            if(type_car in temp):
+                totalcar = TotalCar.objects.get(result=result, type=type_car)
+                totalcar.total += 1
+                totalcar.save()
+            else:
+                totalcar = TotalCar.objects.create(result=result, type=type_car, total=1)
+                temp.append(type_car)
+            
         task.status = Task.STATUS_SUCCESS
     except Exception as e:
         print(e)

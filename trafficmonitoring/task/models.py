@@ -14,7 +14,7 @@ class Task(models.Model):
     location = models.CharField(max_length=100, default="")
     description = models.CharField(max_length=256, default="")
     status = models.CharField(max_length=15, default="")
-    weather = models.CharField(max_length=20)
+    weather = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -28,10 +28,10 @@ class Input(models.Model):
     
 class Result(models.Model):
     input = models.ForeignKey(Input, on_delete=models.CASCADE)
-    video = models.CharField(max_length=512, default="")
+    video = models.FileField(upload_to = 'uploads/', blank=True)
 
     def __str__(self):
-        return f"{self.weather}"
+        return f"{self.video}"
 
 class Loop(models.Model):
     input = models.ForeignKey(Input, on_delete=models.CASCADE)

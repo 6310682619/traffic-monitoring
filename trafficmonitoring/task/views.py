@@ -26,8 +26,8 @@ def counting_result(request, task_id):
     task = Task.objects.get(id=task_id)
     input = Input.objects.get(task=task)
     result = Result.objects.get(input=input)
-    loop = Loop.objects.filter(input=input)
-    totalcar = TotalCar.objects.filter(input=input)
+    # loop = Loop.objects.filter(input=input)
+    # totalcar = {'Car':TotalCar.objects.get(result=result, type='Car').total,}
 
     if request.method == 'POST':
         loop_id = request.POST['loop_id']
@@ -35,15 +35,15 @@ def counting_result(request, task_id):
         return render(request, 'task/result.html', {
             'task': task,
             'result': result,
-            'loop': loop,
-            'totalcar': totalcar,
+            # 'loop': loop,
+            # 'totalcar': totalcar,
             'car': car
         })
     return render(request, 'task/result.html', {
         'task': task,
         'result': result,
-        'loop': loop,
-        'totalcar': totalcar
+        # 'loop': loop,
+        # 'totalcar': totalcar
     })
 
 def create_task(request):

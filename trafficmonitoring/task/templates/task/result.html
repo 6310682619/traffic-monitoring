@@ -11,12 +11,20 @@
             <img src="" alt="">
 
             <div>
-                <p>Time: </p>
+                <p>Time: {{task.date_time}}</p>
             </div>
 
             <div>
-                <p>Weather: </p>
+                <p>Weather: {{task.weather}}</p>
             </div>
+
+            <div>
+                <video width="320" height="240" controls>
+                    <source src="/media/{{ result.video }}" type="video/mp4">
+                </video>
+            </div>
+
+            
         </main>
 
         <aside class="aside">
@@ -28,6 +36,11 @@
                         <th>Car</th>
                         <th>Truck</th>
                         <th>Bike</th>
+                    </tr>
+                    <tr>
+                        <td>{{totalcar.Car}}</td>
+                        <td>Truck</td>
+                        <td>Bike</td>
                     </tr>
                 </table>
             </div>
@@ -76,7 +89,7 @@
     </div>
 
     <footer>
-        <a href="{% url ''%}"><button class="">Back</button></a>
+        {% comment %} <a href="{% url ''%}"><button class="">Back</button></a> {% endcomment %}
     </footer>
 </body>
 {% endblock %}
