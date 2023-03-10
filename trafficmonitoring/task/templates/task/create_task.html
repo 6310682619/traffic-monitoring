@@ -1,0 +1,27 @@
+{% extends 'task/layout.html' %}
+{% block body %}
+<body id = "index">
+    <header>
+        <h1>Crate Task</h1>
+    </header>
+
+    <main>
+        <form action="{% url 'task:create_task' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <lable >name: </lable>
+            <input type="text" name="name">
+            <br><br>
+            <lable >location: </lable>
+            <input type="text" name="location">
+            <br><br>
+            <lable >description: </lable>
+            <input type="text" name="description">
+            <br><br>
+            <lable >upload video: </lable>
+            <input type="file" name="video">
+            <br><br>
+            <input type="submit">
+        </from>
+    </main>
+</body>
+{% endblock %}

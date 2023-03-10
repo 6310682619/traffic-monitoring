@@ -13,7 +13,7 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/')
+            return HttpResponseRedirect(reverse('task:index'))
         else:
             return render(request, 'user/signin.html', {
                 'message': 'Invalid credentials.'
@@ -45,7 +45,7 @@ def signup(request):
             return render(request, 'user/signup.html', {'message2': message2})
 
         # Create a new user account
-        user = User.objects.create(
+        user = User.objects.create_user(
             first_name=firstname,
             last_name=lastname,
             username=username,
