@@ -1,6 +1,13 @@
 {% extends 'task/layout.html' %}
 {% block body %}
 <body>
+    <nav>
+        <a><input type = "text" placeholder="Search..." class="search">
+        <a class="rightbutton">
+            <button class = "">Task</button>
+            <button class = "">Login</button>
+        </a>
+    </nav>
     
     <header>
         <h1>Counting Result</h1>
@@ -19,6 +26,12 @@
             <div>
                 <p>Weather: </p>
             </div>
+
+            <div></div>
+
+            <footer>
+                <a><button class = "">Back</button></a>
+            </footer>
         </main>
 
         <aside class="aside">
@@ -28,8 +41,11 @@
                 <table>
                     <tr>
                         <th>Car: </th>
+                        <td></td>
                         <th>Truck: </th>
+                        <td></td>
                         <th>Bike: </th>
+                        <td></td>
                     </tr>
                 </table>
             </div>
@@ -44,9 +60,12 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td></td>
+                        <td></td>  
                     </tr>
                 </table>
+                <p></p>
+                <a><button class = "">Edit Loop</button></a>
+                <a><button class = "">Delete Loop</button></a>
             </div>
             <p></p>
 
@@ -80,8 +99,5 @@
             </div>
         </aside>
     </div>
-
-    <footer>
-    </footer>
 </body>
 {% endblock %}
