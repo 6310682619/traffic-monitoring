@@ -2,6 +2,7 @@
 
 {% block body %}
 <body>
+<<<<<<< HEAD
     <header>
         header
     </header>
@@ -34,3 +35,51 @@
     </body>
 </body>
 {% endblock %}
+=======
+    <nav>
+        <input type="text" placeholder="Search.." class="search">
+    </nav>
+    <br>
+    <div class="centerb">
+        <h1>My Task</h1>
+        <br>
+        <table class="center">
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th></th>
+                <!--<th>Owner</th>
+                <th>Modify</th>
+                <th>Upload</th>
+                <th>Edit/Delete</th> -->
+            </tr>
+            <!--loop-->
+            {% for t in task %}
+                <form method="post" action="{% url 'task:mytask' %}">
+                <tr>
+                    <td>{{t.date_time}}</td>
+                    <td>{{t.name}}</td>
+                    <td>{{t.location}}</td>
+                    <td>{{t.status}}</td>
+                    <td><a href="{% url 'task:result' t.id %}">Result</a></td>
+                    <!--
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    -->
+                </tr>
+            {% endfor %}
+        </table>
+        <br><br>
+    </div>
+    <div class="centerb ">
+        <button type="submit" class="btn center">New Task</button>
+    <div>
+    
+</body>
+{% endblock %}
+    
+>>>>>>> run
