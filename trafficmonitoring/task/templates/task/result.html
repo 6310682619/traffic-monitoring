@@ -1,14 +1,23 @@
 {% extends 'task/layout.html' %}
 {% block body %}
 <body>
+    <nav>
+        <a><input type = "text" placeholder="Search..." class="search">
+        <a class="rightbutton">
+            <button class = "btn">Task</button>
+            <button class = "btn">Login</button>
+        </a>
+    </nav>
     
     <header>
         <h1>Counting Result</h1>
     </header>
 
-    <div class = "container">
+    <div class = "blockbody grid-container">
         <main class="main">
-            <img src="" alt="">
+            <video>
+                
+            </video>
 
             <div>
                 <p>Time: </p>
@@ -17,6 +26,12 @@
             <div>
                 <p>Weather: </p>
             </div>
+
+            <div></div>
+
+            <footer>
+                <a><button class = "btn">Back</button></a>
+            </footer>
         </main>
 
         <aside class="aside">
@@ -25,9 +40,12 @@
 
                 <table>
                     <tr>
-                        <th>Car: {{ }}</th>
-                        <th>Truck: {{ }}</th>
-                        <th>Bike: {{ }}</th>
+                        <th>Car: </th>
+                        <td></td>
+                        <th>Truck: </th>
+                        <td></td>
+                        <th>Bike: </th>
+                        <td></td>
                     </tr>
                 </table>
             </div>
@@ -41,11 +59,15 @@
                         <th>Loop Name</th>
                     </tr>
                     <tr>
-                        <td>{{ }}</td>
-                        <td>{{ }}</td>
+                        <td></td>
+                        <td></td>  
                     </tr>
                 </table>
+                <p></p>
+                <a><button class = "btn">Edit Loop</button></a>
+                <a><button class = "btn">Delete Loop</button></a>
             </div>
+            <p></p>
 
             <div>
                 <table>
@@ -56,30 +78,26 @@
                         <th>Bike</th>
                     </tr>
                     <tr>
-                        <td>Left</td>
-                        <td>{{ }}</td>
-                        <td>{{ }}</td>
-                        <td>{{ }}</td>
+                        <th>Left</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td>Right</td>
-                        <td>{{ }}</td>
-                        <td>{{ }}</td>
-                        <td>{{ }}</td>
+                        <th>Right</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td>Straight</td>
-                        <td>{{ }}</td>
-                        <td>{{ }}</td>
-                        <td>{{ }}</td>
+                        <th>Straight</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </table>
             </div>
         </aside>
     </div>
-
-    <footer>
-        <a href="{% url ''%}"><button class="">Back</button></a>
-    </footer>
 </body>
 {% endblock %}
