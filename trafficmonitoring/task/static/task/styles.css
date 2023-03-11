@@ -1,5 +1,25 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif,'Poppins';
+}
+
+nav {
+    background-color: #cec387;
+}
+
+.search {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px 16px;
+}
+
 header {
     text-align: center;
+}
+
+.rightbutton {
+    float: right;
 }
 
 .blockbody {
@@ -43,8 +63,7 @@ table, td, th {
   
 table {
     border-collapse: collapse;
-    width: auto;
-    
+    width: auto;  
 }
   
 th {
@@ -54,3 +73,4 @@ th {
 td {
     background-color: #d5e3e0;
 }
+
