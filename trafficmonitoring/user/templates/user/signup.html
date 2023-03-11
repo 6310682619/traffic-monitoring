@@ -7,7 +7,7 @@
     <div class="text-center mt-4">
       <p class="header">Sign Up</p>
       <div class="container w-50">
-        <form class="mt-5" action="#" method="POST">
+        <form class="mt-5" action="{% url 'user:signup' %}" method="POST">
           {% csrf_token %}
           <div class="form-row text-center" style="display: flex; justify-content: center;">
             <div class="form-group">
