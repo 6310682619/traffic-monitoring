@@ -3,6 +3,10 @@ from user.models import Account
 # Create your models here.
     
 class Task(models.Model):
+    STATUS_PENDING = 'PENDING'
+    STATUS_ERROR = 'ERROR'
+    STATUS_SUCCESS = 'SUCCESS'
+
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, default="")
     date_time = models.DateTimeField('date_time', auto_now_add=True)
@@ -10,6 +14,7 @@ class Task(models.Model):
     date_time_upload = models.CharField(max_length=100, default="")
     location = models.CharField(max_length=100, default="")
     description = models.CharField(max_length=256, default="")
+    weather = models.CharField(max_length=20, default="", blank=True)
     status = models.CharField(max_length=15, default="")
 
     def __str__(self):
@@ -25,10 +30,9 @@ class Input(models.Model):
 class Result(models.Model):
     input = models.ForeignKey(Input, on_delete=models.CASCADE)
     video = models.FileField(upload_to = 'uploads/', blank=True)
-    weather = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"{self.weather}"
+        return f"{self.video}"
 
 class Loop(models.Model):
     input = models.ForeignKey(Input, on_delete=models.CASCADE)
