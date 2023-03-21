@@ -99,47 +99,23 @@ def find_line_entry(pt, p0, p1, direction):
     max_y, min_y = max([x[1] for x in pt]), min([x[1] for x in pt])
         
     if direction == 1:
-        if ((max_x == p0[0]) or (max_x == p1[0])) and ((max_y == p0[1]) or (max_y == p1[1])):
-            res = True
-        else:
-            res = False
+        return ((max_x == p0[0]) or (max_x == p1[0])) and ((max_y == p0[1]) or (max_y == p1[1]))
     elif direction == 2:
-        if ((max_x == p0[0]) and (max_x == p1[0])):
-            res = True
-        else:
-            res = False
+        return ((max_x == p0[0]) and (max_x == p1[0]))
     elif direction == 3:
-        if ((max_x == p0[0]) or (max_x == p1[0])) and ((min_y == p0[1]) or (min_y == p1[1])):
-            res = True
-        else:
-            res = False
+        return ((max_x == p0[0]) or (max_x == p1[0])) and ((min_y == p0[1]) or (min_y == p1[1]))
     elif direction == 4:
-        if ((min_y == p0[1]) and (min_y == p1[1])):
-            res = True
-        else:
-            res = False
+        return ((min_y == p0[1]) and (min_y == p1[1]))
     elif direction == 5:
-        if ((min_x == p0[0]) or (min_x == p1[0])) and ((min_y == p0[1]) or (min_y == p1[1])):
-            res = True
-        else:
-            res = False
+        return ((min_x == p0[0]) or (min_x == p1[0])) and ((min_y == p0[1]) or (min_y == p1[1]))
     elif direction == 6:
-        if ((min_x == p0[0]) and (min_x == p1[0])):
-            res = True
-        else:
-            res = False
+        return ((min_x == p0[0]) and (min_x == p1[0]))
     elif direction == 7:
-        if ((min_x == p0[0]) or (min_x == p1[0])) and ((max_y == p0[1]) or (max_y == p1[1])):
-            res = True
-        else:
-            res = False
+        return ((min_x == p0[0]) or (min_x == p1[0])) and ((max_y == p0[1]) or (max_y == p1[1]))
     elif direction == 8:
-        if ((max_y == p0[1]) and (max_y == p1[1])):
-            res = True
-        else:
-            res = False
-    
-    return res
+        return ((max_y == p0[1]) and (max_y == p1[1]))
+
+
 
 def find_rec(x, y, width, height, angle):
     _angle = -angle * math.pi / 180.0
