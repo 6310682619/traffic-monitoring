@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
     'user',
     'task'
 ]
@@ -127,3 +128,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import os
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
 MEDIA_URL= "/media/"
+
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'

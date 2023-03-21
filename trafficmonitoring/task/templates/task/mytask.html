@@ -35,6 +35,7 @@
                     <td>{{t.location}}</td>
                     <td>{{t.status}}</td>
                     <td><a href="{% url 'task:result' t.id %}">Result</a></td>
+                    <td><a href="{% url 'task:edit_loop' t.id %}">Edit Loop</a></td>
                     <!--
                     <td>5</td>
                     <td>6</td>
@@ -47,7 +48,7 @@
         <br><br>
     </div>
     <div class="centerb ">
-        <button type="submit" class="btn center">New Task</button>
+        <a class="btn nav-link text-dark mx-3 align-middle" href="/create_task">New Task</a>
     <div>
     
 </body>

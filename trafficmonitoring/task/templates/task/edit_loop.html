@@ -1,0 +1,81 @@
+{% extends 'task/layout.html' %}
+
+{% block body %}
+<body class="h-100">
+    <nav>
+        <a><input type = "text" placeholder="Search..." class="search">
+        <a class="rightbutton">
+            <button class = "btn">Task</button>
+            <button class = "btn">Login</button>
+            <button class = "btn">Logout</button>
+        </a>
+    </nav>
+        <section>
+            <div class="text-center mt-4">
+                <h1>Edit Loop</h1>
+                <div class="container w-50">
+                    <form class="mt-5" action="{% url 'task:edit_loop' task.id %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row text-left d-grid">
+                            <div class="">
+                                <img src="/media/{{input.fig_img}}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Loop Name</label>
+                                <input type="text" name="loop_name" class="form-control input-box">
+                                <div class="form-group d-flex">
+                                    <label>x</label>
+                                    <input type="text" name="x" class="form-control input-box">
+                                    <label>y</label>
+                                    <input type="text" name="y" class="form-control input-box">
+                                </div>
+                                <div class="form-group d-flex">
+                                    <label>width</label>
+                                    <input type="text" name="width" class="form-control input-box">
+                                    <label>height</label>
+                                    <input type="text" name="height" class="form-control input-box">
+                                </div>
+                                <label>Angle</label>
+                                <input type="text" name="angle" class="form-control input-box">
+                                <label>Direction</label>
+                                <select name="direction" require>
+                                    <option value="" selected disabled hidden>Choose here</option>
+                                    <option value="1">↖</option>
+                                    <option value="2">↑</option>
+                                    <option value="3">↗</option>
+                                    <option value="4">→</option>
+                                    <option value="5">↘</option>
+                                    <option value="6">↓</option>
+                                    <option value="7">↙</option>
+                                    <option value="8">←</option>
+                                </select>
+                            </div>               
+                        </div>
+                        <button type="submit" class="btn">Add Loop</button>
+                    </from>
+                    <div>
+                        <table>
+                            <tr>
+                                <th>Loop Name</th>
+                                <th>Loop Setting</th>
+                                <th>Delete</th>
+                            </tr>
+                            {% for loop in all_loop %}
+                                <tr>
+                                    <td>{{loop.loop_name}}</td>
+                                    <td>x:{{loop.x}} y:{{loop.y}} width:{{loop.width}} height:{{loop.height}} angle:{{loop.angle}} direction:{{loop.direction}}</td>
+                                    <td><a href={% url 'task:delete_loop' loop.id %}>delete</a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        <br>
+                    </div>
+                </div>
+                <a class="btn" href={% url 'task:run_task' task.id%}>run</a>
+            </div>
+            
+        </section>
+
+</body>
+{% endblock %}
+

@@ -23,6 +23,8 @@ class Task(models.Model):
 class Input(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     video = models.FileField(upload_to = 'uploads/', blank=True)
+    sample_img = models.FileField(upload_to = 'uploads/', blank=True)
+    fig_img = models.FileField(upload_to = 'uploads/', blank=True)
 
     def __str__(self):
         return f"{self.video}"
@@ -36,12 +38,13 @@ class Result(models.Model):
 
 class Loop(models.Model):
     input = models.ForeignKey(Input, on_delete=models.CASCADE)
-    loop_name = models.CharField(max_length=100)
-    x = models.IntegerField()
-    y = models.IntegerField()
-    wigth = models.IntegerField()
-    height = models.IntegerField()
-    angle = models.IntegerField()
+    loop_name = models.CharField(max_length=100, blank=True)
+    x = models.IntegerField(blank=True)
+    y = models.IntegerField(blank=True)
+    width = models.IntegerField(blank=True)
+    height = models.IntegerField(blank=True)
+    angle = models.IntegerField(blank=True)
+    direction = models.IntegerField(blank=True)
 
     def __str__(self):
         return f"{self.loop_name}"

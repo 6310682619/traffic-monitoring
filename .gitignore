@@ -7,3 +7,5 @@ db.sqlite3
 **uploads
 
 **.mp4
+*.pyc
+**.pt

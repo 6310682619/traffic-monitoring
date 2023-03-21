@@ -1,0 +1,16 @@
+{
+    "loops":[
+        {
+            "name":"loop1",
+            "id":"0",
+            "points":[
+                {"x":900,"y":600},
+                {"x":900,"y":300},
+                {"x":400,"y":300},
+                {"x":400,"y":600}
+            ],
+            "orientation":"counterclockwise",
+            "summary_location":{"x":20,"y":"20"}
+        }
+    ]
+}
