@@ -11,11 +11,11 @@ from django.contrib.auth.models import User
 def detect_track(opt_json, task_id):
     task = Task.objects.get(id=task_id)
     try:
+        task.status = Task.STATUS_START
+        task.save()
         opt = Opt()
         opt.set_opt(opt_json)
-        print("bbbbbbbb")
         detect = Detect(opt)
-        print("eeeeeeeeeee")
         detect.run()
 
         input = Input.objects.get(task=task)
@@ -35,17 +35,48 @@ def detect_track(opt_json, task_id):
             print(report_car)
         except:
             pass
+        loop = Loop.objects.filter(input=input)
+        list_type_car = ['car', 'motorcycle', 'truck']
+        list_direction = ['LEFT', 'RIGHT', 'STRAIGHT']
+        for t in list_type_car:
+            TotalCar.objects.create(result=result, type=t, total=0)
+
+        for l in loop:
+            for t in list_type_car:
+                for d in list_direction:
+                    Car.objects.create(loop=l, car_total=0, car_type=t, direction=d)
+
         
-        temp = []
+        all_car_id = {}
         for i in range(len(report_car)):
-            type_car = report_car[i][2]
-            if(type_car in temp):
-                totalcar = TotalCar.objects.get(result=result, type=type_car)
-                totalcar.total += 1
-                totalcar.save()
+            direction = report_car[i][-1][:-1]
+            loop_id = report_car[i][0]
+            car_id = report_car[i][1]
+            car_type = report_car[i][2]
+            if " " in direction: direction = direction[1:]
+
+            if(direction == 'ENTERED'):
+                all_car_id[car_id] = car_type
             else:
-                totalcar = TotalCar.objects.create(result=result, type=type_car, total=1)
-                temp.append(type_car)
+                if (car_id in all_car_id):
+                    t = ''
+                    if(all_car_id[car_id] == 'Car'):
+                        t = 'car'
+                    elif(all_car_id[car_id] == 'Motorcycle sidecar'):
+                        t = 'motorcycle'
+                    elif(all_car_id[car_id] == 'Pickup truck'):
+                        t = 'truck'
+                    else:
+                        pass
+                    totalcar = TotalCar.objects.get(result=result, type=t)
+                    loop = Loop.objects.get(id=int(loop_id))
+
+                    car = Car.objects.get(loop=loop, car_type=t, direction=direction)
+                    totalcar.total += 1
+                    car.car_total += 1
+                    totalcar.save()
+                    car.save()
+                    del all_car_id[car_id]
             
         task.status = Task.STATUS_SUCCESS
     except Exception as e:

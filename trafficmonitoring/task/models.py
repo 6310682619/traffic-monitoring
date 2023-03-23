@@ -4,6 +4,7 @@ from user.models import Account
     
 class Task(models.Model):
     STATUS_PENDING = 'PENDING'
+    STATUS_START = 'START'
     STATUS_ERROR = 'ERROR'
     STATUS_SUCCESS = 'SUCCESS'
 

@@ -4,7 +4,8 @@
     <nav>
         <a><input type = "text" placeholder="Search..." class="search">
         <a class="rightbutton">
-            <button class = "btn">Task</button>
+            <a class="btn" href="/mytask">Task</a>
+            {% comment %} <button class = "btn">Task</button> {% endcomment %}
             <button class = "btn">Login</button>
             <button class = "btn">Logout</button>
         </a>
@@ -16,16 +17,17 @@
 
     <div class = "blockbody grid-container">
         <main class="main">
-            <video>
-                
+            <video width="320" height="240" controls>
+                <source src="/media/{{ result.video }}" type="video/mp4">
+                Your browser does not support HTML video.
             </video>
 
             <div>
-                <p>Time: </p>
+                <p>Time: {{task.date_time}}</p>
             </div>
 
             <div>
-                <p>Weather: </p>
+                <p>Weather: {{task.weather}}</p>
             </div>
 
             <div></div>
@@ -42,11 +44,11 @@
                 <table>
                     <tr>
                         <th>Car: </th>
-                        <td></td>
+                        <td>{{list_totalcar.car}}</td>
                         <th>Truck: </th>
-                        <td></td>
+                        <td>{{list_totalcar.truck}}</td>
                         <th>Bike: </th>
-                        <td></td>
+                        <td>{{list_totalcar.motorcycle}}</td>
                     </tr>
                 </table>
             </div>
@@ -58,46 +60,55 @@
                     <tr>
                         <th>No.</th>
                         <th>Loop Name</th>
+                        <th>รายละเอียด</th>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>  
-                    </tr>
+                        {% for i in loop %}
+                            <form method="post" action="{% url 'task:result' task.id %}">
+                                {% csrf_token %}
+                                <tr>
+                                    <td>{{i.id}} </td>
+                                    <td>{{i.loop_name}}</td>
+                                    <td><button type="submit" name = "loop_id" value = "{{i.id}}">detail</button></td>
+                                </tr>
+                            </form> 
+                        {%endfor%}
                 </table>
                 <p></p>
                 <a><button class = "btn">Edit Loop</button></a>
                 <a><button class = "btn">Delete Loop</button></a>
             </div>
             <p></p>
-
-            <div>
-                <table>
-                    <tr>
-                        <th>Direction/Type</th>
-                        <th>Car</th>
-                        <th>Truck</th>
-                        <th>Bike</th>
-                    </tr>
-                    <tr>
-                        <th>Left</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Right</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Straight</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>
-            </div>
+            {%if list_left %}
+                <div>
+                    <p>Loop Name: {{loop_detail.loop_name}}</p>
+                    <table>
+                        <tr>
+                            <th>Direction/Type</th>
+                            <th>Car</th>
+                            <th>Truck</th>
+                            <th>Bike</th>
+                        </tr>
+                        <tr>
+                            <th>Left</th>
+                            <td>{{list_left.car}}</td>
+                            <td>{{list_left.truck}}</td>
+                            <td>{{list_left.motorcycle}}</td>
+                        </tr>
+                        <tr>
+                            <th>Right</th>
+                            <td>{{list_right.car}}</td>
+                            <td>{{list_right.truck}}</td>
+                            <td>{{list_right.motorcycle}}</td>
+                        </tr>
+                        <tr>
+                            <th>Straight</th>
+                            <td>{{list_straight.car}}</td>
+                            <td>{{list_straight.truck}}</td>
+                            <td>{{list_straight.motorcycle}}</td>
+                        </tr>
+                    </table>
+                </div>
+            {%endif%}
         </aside>
     </div>
 </body>
