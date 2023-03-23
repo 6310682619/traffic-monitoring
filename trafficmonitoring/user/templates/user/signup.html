@@ -2,17 +2,6 @@
 {% block body %}
 
 <body class="h-100">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white mb-3">
-    <div class="collapse navbar-collapse  w-100 order-3 dual-collapse2" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="btn mx-3 align-middle" style="background-color: #8797CE; color: white;" href="{% url 'user:signin' %}" role="button">
-                  Sign In
-                </a>
-              </li>
-        </ul>
-    </div>
-</nav>
 <br>
 <section>
     <div class="text-center mt-4">
@@ -21,9 +10,6 @@
         <form class="mt-5" action="{% url 'user:signup' %}" method="POST">
           {% csrf_token %}
           <div class="form-row text-center" style="display: flex; justify-content: center;">
-            <div class="form-group">
-                <img src="https://i.pinimg.com/564x/10/01/7f/10017f98303ce873c8fbf53d28fcee99.jpg" class="profileimg">
-            </div>
           </div>
           <br>
           <div class="form-row text-left">
@@ -69,14 +55,10 @@
               {% endif %}
             </div>
           </div>
-          <br>
-<<<<<<< HEAD
-          <button type="submit" class="btn">Next</button>
+          <button type="submit" class="btn">Sign Up</button>
           <br>
           <a href={% url 'user:signin' %} >Already have an account? Sign In</a>
-=======
-          <button type="submit" class="btn">Submit</button>
->>>>>>> 62f756ffe3312a4b964e8c31c295925d867c12d1
+          
         </form> 
       </div>
     </div>
