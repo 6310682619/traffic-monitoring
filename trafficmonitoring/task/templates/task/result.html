@@ -20,12 +20,6 @@
                 <p>Weather: {{task.weather}}</p>
             </div>
 
-            <div>
-                <video width="320" height="240" controls>
-                    <source src="/media/{{ result.video }}" type="video/mp4">
-                </video>
-            </div>
-
             
             <div></div>
 
@@ -46,11 +40,6 @@
                         <td>{{list_totalcar.truck}}</td>
                         <th>Bike: </th>
                         <td>{{list_totalcar.motorcycle}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{totalcar.Car}}</td>
-                        <td>Truck</td>
-                        <td>Bike</td>
                     </tr>
                 </table>
             </div>
@@ -113,12 +102,9 @@
             {%endif%}
         </aside>
     </div>
-<<<<<<< HEAD
 
     <footer>
         {% comment %} <a href="{% url ''%}"><button class="">Back</button></a> {% endcomment %}
     </footer>
-=======
->>>>>>> 62f756ffe3312a4b964e8c31c295925d867c12d1
 </body>
 {% endblock %}
