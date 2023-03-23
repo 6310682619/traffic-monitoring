@@ -172,3 +172,28 @@ def my_task(request):
     return render(request, 'task/mytask.html', {
         'task': task,
     })
+
+def modify_loop(request, loop_id):
+    loop = Loop.objects.get(id=loop_id)
+    if request.method == "POST":
+        loop_name = request.POST["loop_name"]
+        x = int(request.POST["x"])
+        y = int(request.POST["y"])
+        width = int(request.POST["width"])
+        height = int(request.POST["height"])
+        angle = int(request.POST["angle"])
+        direction = int(request.POST["direction"])
+        loop.save()
+
+        Loop.objects.filter(pk=loop_id).update(
+            loop_name = loop_name,
+            x = x,
+            y = y,
+            width = width,
+            height = height,
+            angle = angle,
+            direction = direction,
+        )
+    return render(request, 'task/modify_loop.html',{
+        "loop":loop
+    })

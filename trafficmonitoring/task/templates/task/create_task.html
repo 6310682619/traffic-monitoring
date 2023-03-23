@@ -1,54 +1,27 @@
 {% extends 'task/layout.html' %}
-
 {% block body %}
-<body class="h-100">
-    <nav>
-        <a><input type = "text" placeholder="Search..." class="search">
-        <a class="rightbutton">
-            <button class = "btn">Task</button>
-            <button class = "btn">Login</button>
-            <button class = "btn">Logout</button>
-        </a>
-    </nav>
-        <section>
-            <div class="text-center mt-4">
-                <h1>New Task</h1>
-                <div class="container w-50">
-                    <form class="mt-5" action="{% url 'task:create_task' %}" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="form-row text-left">
-                            <div class="form-group col-md-6">
-                                <label>Name</label>
-                                <input type="text" name="name" class="form-control input-box">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Date and Time</label>
-                                <input type="text" name="datetime" class="form-control input-box">
-                            </div>
-                        </div>
+<body id = "index">
+    <header>
+        <h1>Crate Task</h1>
+    </header>
 
-                        <div class="form-row text-left">
-                            <div class="form-group col-md-6">
-                                <label>Location</label>
-                                <input type="text" name="location" class="form-control input-box">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Upload file</label>
-                                <input type="file" name="video" class="form-control">
-                            </div>
-                        </div>
-
-                        <br>
-                        <label>Description</label>
-                        <input type="text" name="description" class="form-control input-box">
-                        <br><br>
-                        <button type="submit" class="btn">New loop</button>
-                        <button class="btn">Present</button>
-                    </from>
-                </div>
-            </div>
-        </section>
-
+    <main>
+        <form action="{% url 'task:create_task' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <lable >name: </lable>
+            <input type="text" name="name">
+            <br><br>
+            <lable >location: </lable>
+            <input type="text" name="location">
+            <br><br>
+            <lable >description: </lable>
+            <input type="text" name="description">
+            <br><br>
+            <lable >upload video: </lable>
+            <input type="file" name="video">
+            <br><br>
+            <input type="submit">
+        </from>
+    </main>
 </body>
 {% endblock %}
-
