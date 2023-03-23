@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from user.models import Account
 from django.http import HttpResponseRedirect
@@ -56,4 +56,8 @@ def signup(request):
         return HttpResponseRedirect(reverse('task:index',))
     else:
         return render(request, 'user/signup.html')
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('user:signin'))
     
