@@ -194,4 +194,6 @@ def modify_loop(request, loop_id):
             angle = angle,
             direction = direction,
         )
-    return render(request, 'task/modify_loop.html')
+    return render(request, 'task/modify_loop.html',{
+        "loop":loop
+    })
