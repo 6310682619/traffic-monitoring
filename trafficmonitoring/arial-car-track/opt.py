@@ -49,8 +49,8 @@ class Opt:
     
 OptJson = {
     'weights' : './arial-car-track/yolov7.pt',
-    'download' : False,
-    'no_download' : True,
+    'download' : True,
+    'no_download' : False,
     'source' : 'inference/images',
     'img_size' : 640,
     'conf_thres' : 0.6,
@@ -70,6 +70,8 @@ OptJson = {
     'name' : 'object_tracking',
     'loop' : './arial-car-track/loop.json',
     'colored_trk': True,
+    'loop_txt': True,
+    'summary-txt': True
 }
     
         

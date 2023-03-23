@@ -85,40 +85,52 @@ def append_to_file(filename, text):
         file.write(text + "\n")
 
 class Line():
-    def line_enter_check_and_set(loop,track,tp1,tp2,line_start,line_end):
+    def __init__(self, time_stamp, loop_boxes, loop_id):
+        self.time_stamp = time_stamp
+        self.loop_boxes = loop_boxes
+        self.loop_id = loop_id
+
+    def line_enter_check_and_set(self, loop,track,tp1,tp2,line_start,line_end):
         if isIntersect(tp1,tp2,line_start,line_end):
             if loop["id"] not in track.aoi_entered :
                 track.aoi_entered.append(loop["id"])
-                msg = f'{loop["id"]},{track.id},{names[int(track.detclass)]},{time_stamp},ENTERED'
+                msg = f'{loop["id"]},{track.id},{names[int(track.detclass)]},{self.time_stamp},ENTERED'
                 append_to_file(str(save_dir)+"\\loop.txt",msg)
-                print(f'track {track.id} of type {track.detclass} entered loop {loop["id"]} at time ...{time_stamp}')
-
+                print(f'track {track.id} of type {track.detclass} entered loop {loop["id"]} at time ...{self.time_stamp}')
+    
     #check if the object exit the line, if the first time mark it and prevent the re entry by setting the flag 
-    def line_exit_check_and_set(loop,track,tp1,tp2,line_start,line_end,line_side): #line_side is the left or right border
+    def line_exit_check_and_set(self, loop,track,tp1,tp2,line_start,line_end,line_side): #line_side is the left or right border
         if isIntersect(tp1,tp2,line_start,line_end):
             if loop["id"] in track.aoi_entered and loop["id"] not in track.aoi_exited:
                 track.aoi_exited.append(loop["id"])  # means already exit
-                print(f'track {track.id} of type {track.detclass} exit loop {loop["id"]} at time ...{time_stamp}')
+                print(f'track {track.id} of type {track.detclass} exit loop {loop["id"]} at time ...{self.time_stamp}')
                 if (loop["orientation"] == "clockwise" and line_side=="left" or 
                     loop["orientation"] == "counterclockwise" and line_side=="right"): #turn left
-                    loop_boxes[int(loop["id"])].add_left(int(track.detclass))
-                    msg = f'{loop["id"]},{track.id},{names[int(track.detclass)]},{time_stamp}, LEFT'
+                    print("1111------------")
+                    self.loop_boxes[self.loop_id.index(int(loop["id"]))].add_left(int(track.detclass))
+                    print("1111111111111111")
+                    msg = f'{loop["id"]},{track.id},{names[int(track.detclass)]},{self.time_stamp},LEFT'
                     append_to_file(str(save_dir)+"\\loop.txt",msg)
                     
                 if(loop["orientation"] == "clockwise" and line_side=="right" or 
                     loop["orientation"] == "counterclockwise" and line_side=="left"): #turn right
-                    loop_boxes[int(loop["id"])].add_right(int(track.detclass)) # turn right
-                    msg = f'{loop["id"]},{track.id},{names[int(track.detclass)]},{time_stamp}, RIGHT'
+                    print("2222------------")
+                    self.loop_boxes[self.loop_id.index(int(loop["id"]))].add_right(int(track.detclass)) # turn right
+                    print("2222222222222222")
+                    msg = f'{loop["id"]},{track.id},{names[int(track.detclass)]},{self.time_stamp},RIGHT'
                     append_to_file(str(save_dir)+"\\loop.txt",msg)
 
                 if line_side == "straight":
-                    loop_boxes[int(loop["id"])].add_straight(int(track.detclass))
-                    msg = f'{loop["id"]},{track.id},{names[int(track.detclass)]},{time_stamp}, STRAIGHT'
+                    print("3333------------")
+                    print(self.loop_boxes)
+                    self.loop_boxes[self.loop_id.index(int(loop["id"]))].add_straight(int(track.detclass))
+                    print("3333333333333333")
+                    msg = f'{loop["id"]},{track.id},{names[int(track.detclass)]},{self.time_stamp},STRAIGHT'
                     append_to_file(str(save_dir)+"\\loop.txt",msg)
 
 class Loop(Line):
     #check if item entering or exit loop
-    def check_enter_exit_loop(track, count_boxes):
+    def check_enter_exit_loop(track, count_boxes, time_stamp, loop_boxes, loop_id):
         loops = count_boxes["loops"]
         for loop in loops:
             #print(loop)
@@ -127,12 +139,12 @@ class Loop(Line):
             if len(track.centroidarr)>20:
                 tp2,tp1 = track.centroidarr[-1], track.centroidarr[-20]            
                 #check entering line
-                Line.line_enter_check_and_set(loop,track,tp1,tp2,pt0,pt1)
+                Line(time_stamp, loop_boxes, loop_id).line_enter_check_and_set(loop,track,tp1,tp2,pt0,pt1)
                 
                 #check exit line left straight and right
-                Line.line_exit_check_and_set(loop,track,tp1,tp2,pt1,pt2,"left")
-                Line.line_exit_check_and_set(loop,track,tp1,tp2,pt2,pt3,"straight")
-                Line.line_exit_check_and_set(loop,track,tp1,tp2,pt3,pt0,"right")
+                Line(time_stamp, loop_boxes, loop_id).line_exit_check_and_set(loop,track,tp1,tp2,pt1,pt2,"left")
+                Line(time_stamp, loop_boxes, loop_id).line_exit_check_and_set(loop,track,tp1,tp2,pt2,pt3,"straight")
+                Line(time_stamp, loop_boxes, loop_id).line_exit_check_and_set(loop,track,tp1,tp2,pt3,pt0,"right")
 
     #draw bouncing box to loop
     def draw_loops(img, count_boxes):
@@ -150,19 +162,22 @@ class Loop(Line):
 class Detect(Loop, Box):
     def __init__(self, opt):
         global save_dir
-        global time_stamp
         global names
-        global loop_boxes
 
+        self.loop_boxes = []
+        
         self.opt = opt
         self.source, self.weights, self.view_img, self.save_txt, self.imgsz, self.trace, self.colored_trk= opt.source, \
         opt.weights, opt.view_img, opt.save_txt, opt.img_size, not opt.no_trace, opt.colored_trk
         self.save_img = not opt.nosave and not self.source.endswith('.txt')  # save inference images
         self.webcam = self.source.isnumeric() or self.source.endswith('.txt') or self.source.lower().startswith(
             ('rtsp://', 'rtmp://', 'http://', 'https://'))
-        f = open(opt.loop)
-        self.count_boxes = json.load(f)
-        f.close()
+        # f = open(opt.loop)
+        # self.count_boxes = json.load(f)
+        # f.close()
+
+        self.count_boxes = self.opt.loop
+        self.loop_id = self.opt.loop["loop_id"]
         #.... Initialize SORT .... 
         #......................... 
         self.sort_max_age = 25 #5 
@@ -211,7 +226,7 @@ class Detect(Loop, Box):
         names = self.model.module.names if hasattr(self.model, 'module') else self.model.names
         self.colors = [[random.randint(0, 255) for _ in range(3)] for _ in names]
         for loop in self.count_boxes["loops"]:
-            loop_boxes.append(count_table.LoopCount(len(names),loop["summary_location"],loop))
+            self.loop_boxes.append(count_table.LoopCount(len(names),loop["summary_location"],loop))
 
     def run(self):
         if self.device.type != 'cpu':
@@ -236,7 +251,7 @@ class Detect(Loop, Box):
         frame_count = 0
         for path, img, im0s, vid_cap in self.dataset:
             fps = vid_cap.get(cv2.CAP_PROP_FPS)
-            time_stamp = frame_count/fps #calculate time stamp
+            self.time_stamp = frame_count/fps #calculate time stamp
             frame_count+=1
             img = torch.from_numpy(img).to(self.device)
             img = img.half() if self.half else img.float()  # uint8 to fp16/32
@@ -302,7 +317,7 @@ class Detect(Loop, Box):
                     for track in tracks:
 
                         #tracking object passing line check and update
-                        Loop.check_enter_exit_loop(track, self.count_boxes)
+                        Loop.check_enter_exit_loop(track, self.count_boxes, self.time_stamp, self.loop_boxes, self.loop_id)
 
                         # color = compute_color_for_labels(id)
                         #draw colored tracks
@@ -351,8 +366,9 @@ class Detect(Loop, Box):
             #add counting table
             counttable.img = im0s
             
-            for lb in loop_boxes:
-                lb.draw(counttable)
+            # for lb in loop_boxes:
+            #     lb.draw(counttable)
+
             # cv2.rectangle(im0s,(500,400),(900,550),(0,0,0),cv2.FILLED)
             # cv2.putText(im0s,"        Straight    Left        Right", (500, 420),cv2.FONT_HERSHEY_SIMPLEX, 
             #             0.6, [0, 255, 0], 2)
