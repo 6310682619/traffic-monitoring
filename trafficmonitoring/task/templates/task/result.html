@@ -24,7 +24,7 @@
                 <div></div>
 
                 <footer>
-                    <a><button class = "btn">Back</button></a>
+                    <a href="{% url 'task:mytask' %}"><button class = "btn">Back</button></a>
                 </footer>
             </main>
 
@@ -65,8 +65,8 @@
                             {%endfor%}
                     </table>
                     <p></p>
-                    <a><button class = "btn">Edit Loop</button></a>
-                    <a><button class = "btn">Delete Loop</button></a>
+                    <a href="{% url 'task:edit_loop' task.id %}"><button class = "btn">Edit Loop</button></a>
+                    {% comment %} <a href="{% url 'task:delete_loop' loop.id %}"><button class = "btn">Delete Loop</button></a> {% endcomment %}
                 </div>
                 <p></p>
                 {%if list_left %}

@@ -21,16 +21,14 @@ def index(request):
 
     list_detail_task = {}
     for t in task:
-        total = 0
-        input = Input.objects.get(task=t)
-        # result = Result.objects.get(input=input)
-        # totalcar = TotalCar.objects.filter(result=result)
-        # for car in totalcar:
-        #     total += car.total
-        list_detail_task[t] = {t, input , total}
+        try:
+            input = Input.objects.get(task=t)
+        except:
+            pass
+        list_detail_task[t] = input
 
     return render(request, 'task/index.html', {
-        'task': task,
+        # 'task': task,
         'list_detail_task': list_detail_task
     })
 
@@ -88,7 +86,7 @@ def counting_result(request, task_id):
         'list_totalcar': list_totalcar,
         'list_index': list_index
     })
-
+    
 def create_task(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user:signin'))
@@ -98,9 +96,10 @@ def create_task(request):
         account = Account.objects.get(user=user)
         name = request.POST['name']
         location = request.POST['location']
-        description = request.POST['description']   
+        description = request.POST['description']  
+        weather = request.POST['weather']  
 
-        task = Task.objects.create(account=account, name=name, location=location,
+        task = Task.objects.create(account=account, name=name, location=location, weather=weather,
                                     description=description, status=Task.STATUS_PENDING )
         
         video = request.FILES['video']
@@ -200,7 +199,6 @@ def modify_loop(request, task_id, loop_id):
         angle = int(request.POST["angle"])
         direction = int(request.POST["direction"])
         loop.save()
-
         Loop.objects.filter(pk=loop_id).update(
             loop_name = loop_name,
             x = x,
@@ -210,6 +208,15 @@ def modify_loop(request, task_id, loop_id):
             angle = angle,
             direction = direction,
         )
+        loop.save()
+        set_loop(input).draw_loop()
+        all_loop = Loop.objects.filter(input=input)
+        # return HttpResponseRedirect(reverse('task:edit_loop', args=(task.id,)))
+        return render(request, 'task/edit_loop.html', {
+        "task": task,
+        "input": input,
+        "all_loop": all_loop,
+    })
     return render(request, 'task/modify_loop.html',{
         'task': task,
         'input': input,
