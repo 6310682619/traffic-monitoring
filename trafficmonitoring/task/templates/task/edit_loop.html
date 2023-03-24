@@ -71,6 +71,7 @@
                             <th>Loop Name</th>
                             <th>Loop Setting</th>
                             <th>Delete</th>
+                            <th>Modify</th>
                         </tr>
                         {% for loop in all_loop %}
                             <tr>
@@ -82,9 +83,10 @@
                         {% endfor %}
                     </table>
                     <br>
+                    <a class="btn" href="{% url 'task:run_task' task.id%}">run</a>    
                 </div>
             </div>
-            <a class="btn" href="{% url 'task:run_task' task.id%}">run</a>
+            
         </section>
 
 </body>
