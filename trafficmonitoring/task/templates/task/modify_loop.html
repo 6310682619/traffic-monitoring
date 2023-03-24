@@ -6,7 +6,7 @@
             <div class="text-center mt-4">
                 <h1>Modify Loop</h1>
                 <div class="container w-50">
-                    <form class="mt-5" action="{% url 'task:modify_loop' loop.id %}" method="post" enctype="multipart/form-data">
+                    <form class="mt-5" action="{% url 'task:modify_loop' task.id loop.id %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-row text-center" style="display: flex; justify-content: center;">
                             <div class="form-group">

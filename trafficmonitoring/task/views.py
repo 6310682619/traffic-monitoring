@@ -118,6 +118,9 @@ def create_task(request):
     return render(request, 'task/create_task.html')
 
 def edit_loop(request, task_id):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('user:signin'))
+    
     task = Task.objects.get(id=task_id)
     input = Input.objects.get(task=task)
     if request.method == "POST":
@@ -178,7 +181,9 @@ def my_task(request):
         'task': task,
     })
 
-def modify_loop(request, loop_id):
+def modify_loop(request, task_id, loop_id):
+    task = Task.objects.get(id=task_id)
+    input = Input.objects.get(task=task)
     loop = Loop.objects.get(id=loop_id)
     if request.method == "POST":
         loop_name = request.POST["loop_name"]
@@ -200,5 +205,7 @@ def modify_loop(request, loop_id):
             direction = direction,
         )
     return render(request, 'task/modify_loop.html',{
+        'task': task,
+        'input': input,
         "loop":loop
     })

@@ -15,24 +15,24 @@
           <div class="form-row text-left">
             <div class="form-group col-md-6">
               <label>First Name</label>
-              <input required type="text" class="form-control input-box" id="firstname" name="firstname">
+              <input required type="text" class="form-control" id="firstname" name="firstname">
             </div>
             <div class="form-group col-md-6">
               <label>Last Name</label>
-              <input required type="text" class="form-control input-box" id="lastname" name="lastname">
+              <input required type="text" class="form-control" id="lastname" name="lastname">
             </div>
           </div>
           <div class="form-row text-left">
             <div class="form-group col-md-6">
               <label>Username</label>
-              <input type="text" class="form-control input-box" id="username" name="username">
+              <input type="text" class="form-control" id="username" name="username">
               {% if message2 %}
               <div style="color: red">{{ message2 }}</div>
               {% endif %}
             </div>
             <div class="form-group col-md-6">
               <label>Role</label>
-              <select name="role" class="form-control input-box" required>
+              <select name="role" class="form-control" required>
                 <option value="normal">Normal User</option>
                 <option value="officer">Officer</option>
               </select>
@@ -40,16 +40,16 @@
           </div>
           <div class="form-group text-left">
               <label>Email</label>
-              <input required type="email" class="form-control input-box" id="email" name="email">
+              <input required type="email" class="form-control" id="email" name="email">
           </div>
           <div class="form-row text-left">
             <div class="form-group col-md-6">
               <label>Password</label>
-              <input type="password" class="form-control input-box" id="password" name="password">
+              <input type="password" class="form-control" id="password" name="password">
             </div>
             <div class="form-group col-md-6">
               <label>Confirm Password</label>
-              <input type="password" class="form-control input-box" id="confirmpassword" name="confirmpassword">
+              <input type="password" class="form-control" id="confirmpassword" name="confirmpassword">
               {% if message1 %}
               <div style="color: red">{{ message1 }}</div>
               {% endif %}
@@ -57,7 +57,7 @@
           </div>
           <button type="submit" class="btn">Sign Up</button>
           <br>
-          <a href={% url 'user:signin' %} >Already have an account? Sign In</a>
+          <a href="{% url 'user:signin' %}" >Already have an account? Sign In</a>
           
         </form> 
       </div>
