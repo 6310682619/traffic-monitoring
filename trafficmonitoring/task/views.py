@@ -23,65 +23,60 @@ def index(request):
         'task': task,
     })
 
-# def counting_result(request, task_id):
-#     if not request.user.is_authenticated:
-#         return HttpResponseRedirect(reverse('user:signin'))
-    
-#     task = Task.objects.get(id=task_id)
-#     input = Input.objects.get(task=task)
-#     result = Result.objects.get(input=input)
-#     loop = Loop.objects.filter(input=input)
-#     totalcar = TotalCar.objects.filter(result=result)
-#     list_totalcar = {}
-#     list_index = {}
-#     index = 1
-#     for t in totalcar:
-#         list_totalcar[t.type] = t.total
-
-#     for l in loop:
-#         list_index[l.id] = index
-#         index +=1 
-
-#     if request.method == 'POST':
-#         loop_id = request.POST['loop_id']
-#         loop_detail = Loop.objects.get(id=int(loop_id))
-#         car = Car.objects.filter(loop=loop_detail)
-
-#         list_left = {}
-#         list_right = {}
-#         list_straight = {}
-#         for c in car:
-#             if(c.direction == 'LEFT'):
-#                 list_left[c.car_type] = c.car_total
-#             elif(c.direction == 'RIGHT'):
-#                 list_right[c.car_type] = c.car_total
-#             elif(c.direction == 'STRAIGHT'):
-#                 list_straight[c.car_type] = c.car_total
-#         return render(request, 'task/result.html', {
-#             'task': task,
-#             'result': result,
-#             'loop': loop,
-#             'totalcar': totalcar,
-#             'list_totalcar': list_totalcar,
-#             'loop_detail': loop_detail,
-#             'list_left': list_left,
-#             'list_right': list_right,
-#             'list_straight': list_straight,
-#             'list_index': list_index
-#         })
-#     return render(request, 'task/result.html', {
-#         'task': task,
-#         'result': result,
-#         'loop': loop,
-#         'totalcar': totalcar,
-#         'list_totalcar': list_totalcar,
-#         'list_index': list_index
-#     })
-
-def counting_result(request):
+def counting_result(request, task_id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user:signin'))
-    return render(request, 'task/result.html')
+    
+    task = Task.objects.get(id=task_id)
+    input = Input.objects.get(task=task)
+    result = Result.objects.get(input=input)
+    loop = Loop.objects.filter(input=input)
+    totalcar = TotalCar.objects.filter(result=result)
+    list_totalcar = {}
+    list_index = {}
+    index = 1
+    for t in totalcar:
+        list_totalcar[t.type] = t.total
+
+    for l in loop:
+        list_index[l.id] = index
+        index +=1 
+
+    if request.method == 'POST':
+        loop_id = request.POST['loop_id']
+        loop_detail = Loop.objects.get(id=int(loop_id))
+        car = Car.objects.filter(loop=loop_detail)
+
+        list_left = {}
+        list_right = {}
+        list_straight = {}
+        for c in car:
+            if(c.direction == 'LEFT'):
+                list_left[c.car_type] = c.car_total
+            elif(c.direction == 'RIGHT'):
+                list_right[c.car_type] = c.car_total
+            elif(c.direction == 'STRAIGHT'):
+                list_straight[c.car_type] = c.car_total
+        return render(request, 'task/result.html', {
+            'task': task,
+            'result': result,
+            'loop': loop,
+            'totalcar': totalcar,
+            'list_totalcar': list_totalcar,
+            'loop_detail': loop_detail,
+            'list_left': list_left,
+            'list_right': list_right,
+            'list_straight': list_straight,
+            'list_index': list_index
+        })
+    return render(request, 'task/result.html', {
+        'task': task,
+        'result': result,
+        'loop': loop,
+        'totalcar': totalcar,
+        'list_totalcar': list_totalcar,
+        'list_index': list_index
+    })
     
 def create_task(request):
     if not request.user.is_authenticated:
