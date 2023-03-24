@@ -5,22 +5,25 @@
         <h1>Traffic Monitoring Site</h1>
     </header>
     <main>
-        <div class="blockindex grid-container">
-            <main class="grid-main">
-                <video></video>
-            </main>
+        {% for task in list_detail_task.items %}
+            <a href="{% url 'task:result' task.id %}">
+                <div class="blockindex grid-container">
+                    <img src='/media/{{task.input.sample_img}}' width=250px height=150px>
 
-            <aside class="grid-aside">
-                <div>
-                    Name: {{ t.name }}<br>
-                    Location: {{ t.location}}<br>
-                    Total vehicles: <br>
-                    Weather: {{t.weather}}<br>
-                    Time: {{ t.date_time }}<br>
-                    Create by: {{ t.account }}<br>
+                    <aside class="grid-aside">
+                        <div>
+                            Name: {{ task.t.name }}<br>
+                            Location: {{ task.t.location}}<br>
+                            Total vehicles: {{task.total}}<br>
+                            Weather: {{task.t.weather}}<br>
+                            Time: {{ task.t.date_time }}<br>
+                            Create by: {{ task.t.account }}<br>
+                        </div>
+                    </aside>
                 </div>
-            </aside>
-        </div>
+            </a>
+            <br>
+        {%endfor%}
     </main>
     
 </body>

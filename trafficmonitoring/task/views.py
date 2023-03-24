@@ -19,8 +19,19 @@ def index(request):
     
     task = Task.objects.all().order_by('-date_time')
 
+    list_detail_task = {}
+    for t in task:
+        total = 0
+        input = Input.objects.get(task=t)
+        # result = Result.objects.get(input=input)
+        # totalcar = TotalCar.objects.filter(result=result)
+        # for car in totalcar:
+        #     total += car.total
+        list_detail_task[t] = {t, input , total}
+
     return render(request, 'task/index.html', {
         'task': task,
+        'list_detail_task': list_detail_task
     })
 
 def counting_result(request, task_id):
