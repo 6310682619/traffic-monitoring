@@ -41,8 +41,9 @@
         .blockbody {
             display: block;
             margin: auto;
-            width: 1000px;
+            width: 850px;
         }
+
 
         .blockindex{
             display: block;
@@ -56,16 +57,18 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: auto auto;
+            grid-template-columns: 1fr 2fr;
             grid-template-rows: auto auto;
         }
 
-        .main {
+        .grid-main {
+            padding: 10px;
             grid-column: 1/2;
             grid-row: 1/2;
         }
 
-        .aside {
+        .grid-aside {
+            padding-left: 20px;
             text-align: left;
             grid-column: 2/3;
             grid-row: 1/2;
@@ -149,12 +152,17 @@
             color: black;
         }
 
+        .b-col {
+            background-color: #8797CE;
+        }
                 
         </style>
+
+        
             
 </head>
 <nav class="navbar navbar-expand-lg bar">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler b-col" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
