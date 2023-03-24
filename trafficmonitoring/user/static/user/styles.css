@@ -42,6 +42,7 @@ a:active { text-decoration: none; }
     margin-bottom: 5px;
 }
 
+/*
 .input-box{
     margin-bottom: 25px;
     padding: 25px;
@@ -51,7 +52,7 @@ a:active { text-decoration: none; }
     border-radius: 5px;
     outline: none;
     color: black;
-}
+}*/
 
 .btn{
     margin-bottom: 25px;
