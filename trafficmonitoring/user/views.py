@@ -52,8 +52,7 @@ def signup(request):
 
         Account.objects.create(user=user)
 
-        login(request, user)
-        return HttpResponseRedirect(reverse('task:index',))
+        return HttpResponseRedirect(reverse('user:signin',))
     else:
         return render(request, 'user/signup.html')
 
