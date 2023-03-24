@@ -78,7 +78,7 @@
                                 <td>{{loop.loop_name}}</td>
                                 <td>x:{{loop.x}} y:{{loop.y}} width:{{loop.width}} height:{{loop.height}} angle:{{loop.angle}} direction:{{loop.direction}}</td>
                                 <td><a href="{% url 'task:delete_loop' loop.id %}">delete</a></td>
-                                <td><a href="{% url 'task:modify_loop' loop.id %}">modify</a></td>
+                                <td><a href="{% url 'task:modify_loop' task.id loop.id %}">modify</a></td>
                             </tr>
                         {% endfor %}
                     </table>
