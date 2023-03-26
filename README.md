@@ -3,6 +3,8 @@
 ## Links
 [![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/73fS3vkKq0NxxduDLHL5PR/cn332?node-id=0%3A1&t=lVOX92F7X57qI8O7-1)
 
+[![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/aDyfa4BjlbU)
+
 ## TEAM MEMBERS
 
 - 6210612658 พิตตินันท์ เลิศสิริมั่นคง
