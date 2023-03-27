@@ -191,32 +191,17 @@ def modify_loop(request, task_id, loop_id):
     input = Input.objects.get(task=task)
     loop = Loop.objects.get(id=loop_id)
     if request.method == "POST":
-        loop_name = request.POST["loop_name"]
-        x = int(request.POST["x"])
-        y = int(request.POST["y"])
-        width = int(request.POST["width"])
-        height = int(request.POST["height"])
-        angle = int(request.POST["angle"])
-        direction = int(request.POST["direction"])
-        loop.save()
-        Loop.objects.filter(pk=loop_id).update(
-            loop_name = loop_name,
-            x = x,
-            y = y,
-            width = width,
-            height = height,
-            angle = angle,
-            direction = direction,
-        )
+        loop.loop_name = request.POST["loop_name"]
+        loop.x = int(request.POST["x"])
+        loop.y = int(request.POST["y"])
+        loop.width = int(request.POST["width"])
+        loop.height = int(request.POST["height"])
+        loop.angle = int(request.POST["angle"])
+        loop.direction = int(request.POST["direction"])
         loop.save()
         set_loop(input).draw_loop()
-        all_loop = Loop.objects.filter(input=input)
-        # return HttpResponseRedirect(reverse('task:edit_loop', args=(task.id,)))
-        return render(request, 'task/edit_loop.html', {
-        "task": task,
-        "input": input,
-        "all_loop": all_loop,
-    })
+        return HttpResponseRedirect(reverse('task:edit_loop', args=(task.id,)))
+
     return render(request, 'task/modify_loop.html',{
         'task': task,
         'input': input,
