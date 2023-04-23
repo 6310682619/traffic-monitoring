@@ -22,6 +22,8 @@ def index(request):
     list_detail_task = {}
     for t in task:
         total = 0
+        if t.status != "SUCCESS":
+            continue
         try:
             input = Input.objects.get(task=t)
             result = Result.objects.get(input=input)
