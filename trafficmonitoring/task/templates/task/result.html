@@ -65,7 +65,9 @@
                             {%endfor%}
                     </table>
                     <p></p>
-                    <a href="{% url 'task:edit_loop' task.id %}"><button class = "btn">Edit Loop</button></a>
+                    {% if task.account.user.username == user.username %}
+                        <a href="{% url 'task:edit_loop' task.id %}"><button class = "btn">Edit Loop</button></a>
+                    {% endif %}
                     {% comment %} <a href="{% url 'task:delete_loop' loop.id %}"><button class = "btn">Delete Loop</button></a> {% endcomment %}
                 </div>
                 <p></p>
