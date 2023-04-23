@@ -21,11 +21,16 @@ def index(request):
 
     list_detail_task = {}
     for t in task:
+        total = 0
         try:
             input = Input.objects.get(task=t)
+            result = Result.objects.get(input=input)
+            totalCar = TotalCar.objects.filter(result=result)
+            for car in totalCar:
+                total += car.total
         except:
             pass
-        list_detail_task[t] = input
+        list_detail_task[t] = {'input':input, 'total': total}
 
     return render(request, 'task/index.html', {
         # 'task': task,
