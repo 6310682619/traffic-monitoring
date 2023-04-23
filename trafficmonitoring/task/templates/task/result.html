@@ -20,11 +20,18 @@
                     <p>Weather: {{task.weather}}</p>
                 </div>
 
+                <div>
+                    <p>Created By: {{task.account.user.username}}</p>
+                </div>
+
                 
                 <div></div>
 
                 <footer>
                     <a href="{% url 'task:mytask' %}"><button class = "btn">Back</button></a>
+                    {% if task.account.user.username == user.username %}
+                        <a href="{% url 'task:edit_loop' task.id %}"><button class = "btn">Edit Loop</button></a>
+                    {% endif %}
                 </footer>
             </main>
 
@@ -59,15 +66,12 @@
                                     <tr>
                                         <td>{{i.id}} </td>
                                         <td>{{i.loop_name}}</td>
-                                        <td><button class = "btn" type="submit" name = "loop_id" value = "{{i.id}}">detail</button></td>
+                                        <td><button style ="margin:0px" class = "btn" type="submit" name = "loop_id" value = "{{i.id}}">detail</button></td>
                                     </tr>
                                 </form> 
                             {%endfor%}
                     </table>
                     <p></p>
-                    {% if task.account.user.username == user.username %}
-                        <a href="{% url 'task:edit_loop' task.id %}"><button class = "btn">Edit Loop</button></a>
-                    {% endif %}
                     {% comment %} <a href="{% url 'task:delete_loop' loop.id %}"><button class = "btn">Delete Loop</button></a> {% endcomment %}
                 </div>
                 <p></p>
