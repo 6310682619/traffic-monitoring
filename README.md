@@ -3,7 +3,7 @@
 ## Links
 [![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/73fS3vkKq0NxxduDLHL5PR/cn332?node-id=0%3A1&t=lVOX92F7X57qI8O7-1)
 
-[![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/aDyfa4BjlbU)
+[![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)](https://youtu.be/__ifj09UCag)
 
 ## TEAM MEMBERS
 
@@ -14,5 +14,3 @@
 - 6310682650 รัญชนา ศุภเสวต
 - 6310682809 ไพศาล แซ่โล
 - 6310682817 นัฐวุฒิ พิชัยกาล
-
-Thank You
